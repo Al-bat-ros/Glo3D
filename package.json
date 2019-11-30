@@ -1,5 +1,5 @@
 {
-  "name": "3DGlo",
+  "name": "Glo3D",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Al-bat-ros/Glo3D.git"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Al-bat-ros/Glo3D/issues"
+  },
+  "homepage": "https://github.com/Al-bat-ros/Glo3D#readme"
 }

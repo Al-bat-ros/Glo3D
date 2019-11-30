@@ -20,8 +20,8 @@ const sendForm = () => {
                     
                         formData.forEach((val, key) => {
                         body[key] = val;
-                        
                         });
+
                         postData(body, () => { 
                             input.forEach((elem)=>{
                                 elem.value = '';    
@@ -34,10 +34,9 @@ const sendForm = () => {
                             statusMessage.textContent = errorMessage;
                             console.error(error);   
                         });
-
                 });
           });
-          const postData = (body) => { 
+          const postData = (body, success, errorMess) => { 
             fetch('./server.php', {
                 method: 'POST',
                 headers: {
@@ -48,14 +47,17 @@ const sendForm = () => {
             })
                 .then((response) => {
                     if (response.status !== 200){
+                        console.log(1);
                         throw 'error';
                     }
                 return(response.json);
             })
             .then((response) => {
-            
+                success();
             })
-            .catch((error) => console.error(error));
+            .catch(() => {
+                errorMess(error);
+            });
         };
 };
 
