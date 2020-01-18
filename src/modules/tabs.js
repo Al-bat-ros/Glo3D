@@ -9,8 +9,9 @@ const tabs = () => {
                     tab[i].classList.add('active');
                     tabContent[i].classList.remove('d-none');
                 } else {
-                    tab[i].classList.remove('active');
                     tabContent[i].classList.add('d-none');
+                    tab[i].classList.remove('active');
+                    
                 }
             }    
         };  
