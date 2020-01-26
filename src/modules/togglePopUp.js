@@ -1,10 +1,24 @@
 const togglePopUp = () => {
-    const popup = document.querySelector('.popup');
-    const popupBtn = document.querySelectorAll('.popup-btn');
+    const popupContent = document.querySelector('.popup-content'),
+          popup = document.querySelector('.popup'),
+          popupBtn = document.querySelectorAll('.popup-btn');
+          let count = 0.01;
+
+    const animPopup = () =>{
+        let requestId = requestAnimationFrame(animPopup);
+        count += 0.01;
+        popupContent.style.opacity = count;
+        if(Math.floor(count) === 1){
+            cancelAnimationFrame(requestId);
+            count = 0.01;
+        }  
+        console.log(count);
+    }
 
     popupBtn.forEach((elem) => {
         elem.addEventListener('click', () => {
           popup.style.display = 'block';
+          animPopup();
         });
     });
 
