@@ -5,16 +5,17 @@ const togglePopUp = () => {
           let count = 0.01;
 
     const animPopup = () =>{
-        let requestId = requestAnimationFrame(animPopup);
-        count += 0.01;
-        popupContent.style.opacity = count;
-        if(Math.floor(count) === 1){
-            cancelAnimationFrame(requestId);
-            count = 0.01;
-        }  
-        console.log(count);
+        if(screen.width > 768){
+            let requestId = requestAnimationFrame(animPopup);
+            count += 0.01;
+            popupContent.style.opacity = count;
+            if(Math.floor(count) === 1){
+                cancelAnimationFrame(requestId);
+                count = 0.01;
+            }  
+        }
+     
     }
-
     popupBtn.forEach((elem) => {
         elem.addEventListener('click', () => {
           popup.style.display = 'block';

@@ -9,6 +9,7 @@ elementClosest(window);
 import countTimer from './modules/countTimer';
 import toggleMenu from './modules/toggleMenu';
 import togglePopUp from './modules/togglePopUp';
+import  smoothScroll from './modules/smoothScroll';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 import command from './modules/command';
@@ -24,6 +25,9 @@ toggleMenu();
 
 //popup
 togglePopUp();
+
+//smoothScroll
+smoothScroll();
 
 // Табы
 tabs();
