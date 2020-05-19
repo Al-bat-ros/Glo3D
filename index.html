@@ -26,7 +26,7 @@
                 <div class="row justify-content-between main-header">
                     <div class="col-md-2 col-sm-4 col-4">
                         <div class="logo">
-                            <img class="logo-img" src="images/3dglo.png" alt="...">
+                            <img class="logo-img" src="images/3dglo.png" alt="">
 
                         </div>
                     </div>
@@ -236,6 +236,8 @@
                     <div class="companies-hor-item"><img src="images/companies/companies-6.png" alt=""></div>
                     <div class="companies-hor-item"><img src="images/companies/companies-7.png" alt=""></div>
                 </div>
+                <!-- <button id="test-left"> < </button>
+                <button id="test-right"> > </button> -->
             </div>
         </div>
     </div>
@@ -386,9 +388,6 @@
                 <div class="col-md-6 col-sm-6 col-12">
                     <p>2019. Все права защищены</p>
                 </div>
-                <div class="col-md-6 col-sm-6 col-12 web">
-                    <img src="./images/footer/academy.png" alt="">
-                </div>
             </div>
         </div>
     </footer>
@@ -417,5 +416,19 @@
         </div>
     </div>
   <script src="./dist/main.js"></script>
+  <script src="./src/modules/SliderCarousel.js"></script>
+  <script>
+
+      const carousel = new SliderCarousel({
+          main: '.companies-wrapper',
+          wrap: '.companies-hor',
+          next: '#test-right',
+          prev: '#test-left',
+          slidesToShow: 3,
+          infinity: true
+      });
+ 
+      carousel.init();
+  </script>
 </body>
 </html>
