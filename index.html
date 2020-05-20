@@ -425,7 +425,20 @@
           next: '#test-right',
           prev: '#test-left',
           slidesToShow: 3,
-          infinity: true
+          infinity: true,
+
+          responsive: [{
+             breakpoint: 1024,
+             slideToShow: 3 
+          },
+          {
+             breakpoint: 768,
+             slideToShow: 2 
+          },
+          {
+             breakpoint: 576,
+             slideToShow: 1 
+          }]
       });
  
       carousel.init();

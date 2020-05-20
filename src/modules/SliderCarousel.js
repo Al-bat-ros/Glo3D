@@ -8,7 +8,8 @@ class SliderCarousel {
         prev, 
         infinity = false,
         position = 0, 
-        slidesToShow = 4
+        slidesToShow = 4,
+        responsive = []
     }){
         this.main = document.querySelector(main);
         this.wrap = document.querySelector(wrap);
@@ -20,7 +21,9 @@ class SliderCarousel {
             position,
             infinity,
             widthSlide: Math.floor(100/this.slidesToShow)
-        }
+        };
+        this.responsive = responsive;
+
     }
     init(){
        this.addGloClass();
@@ -32,6 +35,10 @@ class SliderCarousel {
            this.addArrow();
            this.controlSlider();
        }
+       if(this.responsive){
+           this.responsInit();
+       }
+       
     }
 
     addGloClass(){
@@ -43,8 +50,12 @@ class SliderCarousel {
     }
 
     addStyle(){
-        const style = document.createElement('style');
-        style.id = 'sliderCorusel-style';
+        let style = document.getElementById('sliderCorusel-style');
+        if(!style){
+            style = document.createElement('style');
+            style.id = 'sliderCorusel-style';
+        };
+        
         style.textContent = `
             .glo-slider{
                 overflow: hidden !important;
@@ -54,6 +65,9 @@ class SliderCarousel {
                 transition: transform 0.5s !important;
             }
             .glo-slider_item{
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
                 flex: 0 0 ${this.options.widthSlide}% !important;
                 margin: auto 0 !important;
             }
@@ -128,6 +142,26 @@ class SliderCarousel {
         `;
 
              document.head.appendChild(style);
+    }
+    responsInit(){
+        const slidesToShowDefault = this.slidesToShow;
+        const allRespons = this.responsive.map(item => item.breakpoint);
+        const maxResponse = Math.max(...allRespons);
+
+        const checkResponse = () => {
+            const widthWindow = document.documentElement.clientWidth;
+           if(widthWindow < maxResponse){
+               for (let i = 0; i < allRespons.length; i++){
+                   if(widthWindow < allRespons[i]){
+                    this.slidesToShow = this.responsive[i].slideToShow;
+                    this.options.widthSlide = Math.floor(100/this.slidesToShow);
+                    this.addStyle();
+                   }
+               }
+           }
+        }
+       
+        checkResponse();
     }
 
 } 
