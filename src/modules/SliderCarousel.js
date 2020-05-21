@@ -156,12 +156,18 @@ class SliderCarousel {
                     this.slidesToShow = this.responsive[i].slideToShow;
                     this.options.widthSlide = Math.floor(100/this.slidesToShow);
                     this.addStyle();
-                   }
+                   } 
                }
-           }
+            } else {
+                this.slidesToShow = slidesToShowDefault;
+                this.options.widthSlide = Math.floor(100/this.slidesToShow);
+                this.addStyle();
+            }
         }
-       
+        
         checkResponse();
+
+        window.addEventListener('resize', checkResponse);
     }
 
 } 
