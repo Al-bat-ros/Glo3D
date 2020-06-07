@@ -9,7 +9,6 @@ const smoothScroll = () => {
             if(element === target && !target.matches('.close-btn')){
                 event.preventDefault(); 
                 const hrefID = target.getAttribute('href');
-                console.log(document.querySelector('' + hrefID));
                 document.querySelector('' + hrefID).scrollIntoView({
                     behavior: "smooth",
                     block: "start"

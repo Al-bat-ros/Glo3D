@@ -98,7 +98,6 @@ class SliderCarousel {
         
         if(this.options.infinity || this.options.position < this.slides.length - this.slidesToShow){
             ++this.options.position;
-            console.log(this.options.position);
             if( this.options.position > this.slides.length - this.slidesToShow){
                 this.options.position = 0;
             }

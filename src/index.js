@@ -9,12 +9,12 @@ elementClosest(window);
 import countTimer from './modules/countTimer';
 import toggleMenu from './modules/toggleMenu';
 import togglePopUp from './modules/togglePopUp';
-import  smoothScroll from './modules/smoothScroll';
+import smoothScroll from './modules/smoothScroll';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
-import command from './modules/command';
+// import sliderCarousel from './modules/sliderCarousel';
 import calc from './modules/calc';
-import validation from './modules/validation';
+// import validation from './modules/validation';
 import sendForm from './modules/sendForm';
 
 //Timer
@@ -35,14 +35,14 @@ tabs();
 // СЛАЙДЕР
 slider();
 
-// Команда
-command();
+// Cлидер карусель
+// sliderCarousel();
 
 // Калькулятор
 calc(100);
 
 // Валидация
-validation();
+// validation();
 
 //send-ajax-form
 sendForm();

@@ -236,8 +236,6 @@
                     <div class="companies-hor-item"><img src="images/companies/companies-6.png" alt=""></div>
                     <div class="companies-hor-item"><img src="images/companies/companies-7.png" alt=""></div>
                 </div>
-                <!-- <button id="test-left"> < </button>
-                <button id="test-right"> > </button> -->
             </div>
         </div>
     </div>
@@ -417,6 +415,8 @@
     </div>
   <script src="./dist/main.js"></script>
   <script src="./src/modules/SliderCarousel.js"></script>
+  <script src="./plagins/validator/validator.js"></script>
+  <script src="./plagins/numberScroll/scrollNumber.js"></script>
   <script>
 
       const carousel = new SliderCarousel({
@@ -440,8 +440,38 @@
              slideToShow: 1 
           }]
       });
- 
       carousel.init();
+
+      const valid = new Validator({
+          selector: '#form1',
+          pattern: {
+           
+          },
+          method: {
+                'form1-name': [
+                    ['notEmpty'],
+                    ['pattern', 'name']
+                ],
+                'form1-phone': [
+                    ['notEmpty'],
+                    ['pattern', 'phone']
+                ],
+                'form1-email': [
+                    ['notEmpty'],
+                    ['pattern', 'email']
+                ]
+            }
+      });
+      valid.init();
+
+    //   const enumNum = new EnumNumber({
+    //         value: '#total',
+    //         input: '#input',
+    //         listenBtn: '#listenBtn',
+    //         speed: 1
+
+    //     })
+    //   enumNum.init();
   </script>
 </body>
 </html>
