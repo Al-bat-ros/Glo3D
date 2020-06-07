@@ -1,5 +1,5 @@
 class Validator {
-    constructor({selector, pattern, method}){
+    constructor({selector, pattern = {}, method}){
         this.form = document.querySelector(selector);//
         this.pattern = pattern;// кастомные шаблоны
         this.method = method;// настройки
@@ -7,42 +7,86 @@ class Validator {
             return item.tagName.toLowerCase() !== 'button' &&
             item.type !== 'button';
         });
+        this.error = new Set();
     }
     init(){
+
         this.applyStyle();
+        this.setPattern();
         this.elementsForm.forEach(elem => elem.addEventListener('change', this.chekIt.bind(this)));
+
+
+        this.form.addEventListener('submit', e => {
+            e.preventDefault();
+            this.elementsForm.forEach(elem => this.chekIt({target: elem}));
+        
+            if(this.error.size){
+                e.preventDefault();
+            }
+        })
     }
 
+    //здесь проходит волидация
     isValid(elem){
-        
-       return false;
+        const validatorMethod = {
+            notEmpty(elem){
+                if(elem.value.trim() === ''){
+                    return false;
+                }
+                return true;
+            },
+            pattern(elem, pattern){
+                return pattern.test(elem.value);
+            }
+        };
+
+        if(this.method){
+            console.log(this.method);
+            const method = this.method[elem.id];
+                    console.log(method);
+            if(method){
+               return method.every( item => validatorMethod[item[0]](elem, this.pattern[item[1]]));
+            }
+        }else{
+            console.warn('Необходимо предать id полей ввода и методы проверки этих полей!')
+        }
+      
+       return true;
     }
 
+    //определяет прошел валидацию или нет
     chekIt(event){
-        const target = event.target;
-        
+        const target = event.target; 
+        console.log(target);
        if(this.isValid(target)){ 
-           this.showSuccess(target);   
+           this.showSuccess(target); 
+           this.error.delete(target);  
        }else{
         this.showError(target);
+        this.error.add(target);
        }
     }
 
     //Сообщает если наш инпут непрошол валидацию
     showError(elem){
+        console.log('showError', elem);
         elem.classList.remove('success');
         elem.classList.add('error');
+        if (elem.nextElementSibling && elem.nextElementSibling.classList.contains('validator-error')){
+            return;
+        }
         const errorDiv = document.createElement('div');
         errorDiv.textContent = 'Ошибка в этом поле';
         errorDiv.classList.add('validator-error');
-        elem.insertAdjacetElement('afterend', errorDiv);
+        elem.insertAdjacentElement('afterend', errorDiv);
     }
 
     //Валидация прошла успешно
     showSuccess(elem){
+        console.log('showSuccess', elem);
         elem.classList.remove('error');
         elem.classList.add('success');
-        if (elem.nextElementSibling.classList.contains('validator-error')){
+        if (elem.nextElementSibling && elem.nextElementSibling.classList.contains('validator-error')){
             elem.nextElementSibling.remove();
         }
     }
@@ -51,17 +95,29 @@ class Validator {
         const style = document.createElement('style');
         style.textContent = `
         input.success{
-            border: 2px solid green
+            border: 2px solid green !important;
         }
         input.error {
-            border: 2px solid red
+            border: 2px solid red !important;
         }
         .validator-error {
-            font-size: 14px;
-            color: red
+            font-size: 18px;
+            font-family: sans-serif;
+            color: red;
         }
         `;
         document.head.appendChild(style);
     }
-    
+    setPattern(){
+        if(!this.pattern.name){
+            this.pattern.name = /^[A-zА-яЁё]{3,16}$/;
+        }
+        if(!this.pattern.phone){
+            // this.pattern.phone = /^\+?[78]([-()]*\d){10}$/;
+            this.pattern.phone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+        }
+        if(!this.pattern.email){
+            this.pattern.email = /.+@.+\..+/i;
+        }
+    }  
 }

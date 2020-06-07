@@ -1,5 +1,4 @@
 const validation = () => {
-       
     const phone = document.querySelectorAll('.form-phone');
     const name = document.querySelectorAll('.form-name');
    
@@ -18,5 +17,5 @@ const validation = () => {
     });
 };
 
-export default validation;
+// export default validation;
 

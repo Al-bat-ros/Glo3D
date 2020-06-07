@@ -1,4 +1,5 @@
 const toggleMenu = () => {
+   
     const btnMenu = document.querySelector('.menu'),
           menu = document.querySelector('menu'),
           menuItems = menu.querySelectorAll('ul>li');

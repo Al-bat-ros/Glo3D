@@ -799,3 +799,18 @@ footer {
       right: 5px; }
     .portfolio-btn.prev {
       left: 5px; } }
+      input.success{
+        border: 2px solid green
+    }
+    input.error {
+        border: 2px solid red
+    }
+    .validator-error {
+        font-size: 12px;
+        font-family: sans-serif;
+        color: red
+    }
+
+
+
+ 
