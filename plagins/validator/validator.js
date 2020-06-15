@@ -1,29 +1,19 @@
 class Validator {
     constructor({selector, pattern = {}, method}){
-        this.form = document.querySelector(selector);//
+        this.form = document.querySelectorAll(selector);//
         this.pattern = pattern;// кастомные шаблоны
         this.method = method;// настройки
-        this.elementsForm = [...this.form.elements].filter(item => {
-            return item.tagName.toLowerCase() !== 'button' &&
-            item.type !== 'button';
+        this.arrElement = [];
+        this.form.forEach(item => {  
+            this.arrElement.push(item);
         });
         this.error = new Set();
     }
-    init(){
 
+    init(){
         this.applyStyle();
         this.setPattern();
-        this.elementsForm.forEach(elem => elem.addEventListener('change', this.chekIt.bind(this)));
-
-
-        this.form.addEventListener('submit', e => {
-            e.preventDefault();
-            this.elementsForm.forEach(elem => this.chekIt({target: elem}));
-        
-            if(this.error.size){
-                e.preventDefault();
-            }
-        })
+        this.arrElement.forEach(elem => elem.addEventListener('change', this.chekIt.bind(this)));
     }
 
     //здесь проходит волидация
@@ -41,9 +31,7 @@ class Validator {
         };
 
         if(this.method){
-            console.log(this.method);
-            const method = this.method[elem.id];
-                    console.log(method);
+            const method = this.method[elem.classList[0]];      
             if(method){
                return method.every( item => validatorMethod[item[0]](elem, this.pattern[item[1]]));
             }
@@ -57,7 +45,6 @@ class Validator {
     //определяет прошел валидацию или нет
     chekIt(event){
         const target = event.target; 
-        console.log(target);
        if(this.isValid(target)){ 
            this.showSuccess(target); 
            this.error.delete(target);  
@@ -69,7 +56,6 @@ class Validator {
 
     //Сообщает если наш инпут непрошол валидацию
     showError(elem){
-        console.log('showError', elem);
         elem.classList.remove('success');
         elem.classList.add('error');
         if (elem.nextElementSibling && elem.nextElementSibling.classList.contains('validator-error')){
@@ -83,7 +69,6 @@ class Validator {
 
     //Валидация прошла успешно
     showSuccess(elem){
-        console.log('showSuccess', elem);
         elem.classList.remove('error');
         elem.classList.add('success');
         if (elem.nextElementSibling && elem.nextElementSibling.classList.contains('validator-error')){
@@ -117,7 +102,8 @@ class Validator {
             this.pattern.phone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
         }
         if(!this.pattern.email){
-            this.pattern.email = /.+@.+\..+/i;
+            // this.pattern.email = /.+@.+\..+/i;
+            this.pattern.email = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
         }
     }  
 }

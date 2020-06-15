@@ -2,6 +2,7 @@ const sendForm = () => {
     const errorMessage = 'Что то пошло не так...',
           loadMessage = 'Загрузка',
           successMesage = 'Спасибо! Мы скоро с вами свяжемся';
+          console.log(11);
           
           // add div massages
           const form = document.querySelectorAll('form');

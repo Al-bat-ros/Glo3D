@@ -101,8 +101,8 @@ body menu {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%)
+    -webkit-transform: translateX(200%);
+    transform: translateX(200%)
 }
 
 body .active-menu {
